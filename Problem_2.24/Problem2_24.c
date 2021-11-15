@@ -49,11 +49,11 @@ int main()
 	ld = read(0, &destination, MAX_FILENAME_LENGTH);
 	destination[ld - 1] = '\0';
 	
-	
+	/*
 	printf("%d", ld);
 	printf("%s", source);
 	printf("%s", destination);
-	
+	*/
 
 	//Open the source file
 	s = open(source, O_RDONLY);
