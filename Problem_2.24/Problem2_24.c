@@ -19,11 +19,11 @@ int main()
 	char source[MAX_FILENAME_LENGTH];
 	char destination[MAX_FILENAME_LENGTH];
 	
-	const char *prompt_ls = "Enter number of characters in name of the source file";
-	const char *prompt_ld = "Enter number of characters in name of the destination file";
+	const char *prompt_ls = "Enter number of characters in name of the source file ";
+	const char *prompt_ld = "Enter number of characters in name of the destination file ";
 	
-	unsigned int ls;
-	unsigned int ld;
+	int ls;
+	int ld;
 	
 	const char *prompt_s = "Enter name of the source file : ";
 	const char *prompt_d = "Enter name of the destination file : ";
@@ -40,15 +40,20 @@ int main()
 	extern int errno;
 	
 	//Taking input
-	write(0, prompt_ls, strlen(prompt_ls));
-	read(0, &ls, sizeof(unsigned int));
 	write(0, prompt_s, strlen(prompt_s));
-	read(0, &source, ls);
+	ls = read(0, &source, MAX_FILENAME_LENGTH);
+	source[ls - 1] = '\0';
 	
-	write(0, prompt_ld, strlen(prompt_ld));
-	read(0, &ld, sizeof(unsigned int));
+
 	write(0, prompt_d, strlen(prompt_d));
-	read(0, &destination, ld);
+	ld = read(0, &destination, MAX_FILENAME_LENGTH);
+	destination[ld - 1] = '\0';
+	
+	
+	printf("%d", ld);
+	printf("%s", source);
+	printf("%s", destination);
+	
 
 	//Open the source file
 	s = open(source, O_RDONLY);
