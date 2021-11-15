@@ -7,6 +7,7 @@
 #include<errno.h>
 #include<string.h>
 
+#define MAX_FILENAME_LENGTH 100 
 int main()
 {
 	int s;
@@ -14,6 +15,9 @@ int main()
 	int r;
 	int w;
 	char op;
+	
+	char source[MAX_FILENAME_LENGTH];
+	char destination[MAX_FILENAME_LENGTH];
 	
 	const char *prompt_s = "Enter name of the source file : ";
 	const char *prompt_d = "Enter name of the destination file : ";
@@ -31,11 +35,12 @@ int main()
 	
 	//Taking input
 	write(0, prompt_s, strlen(prompt_s));
-	read
+	scanf("%s", source);
 	write(0, prompt_d, strlen(prompt_d));
+	scanf("%s", destination);
 
 	//Open the source file
-	s = open(argv[1], O_RDONLY);
+	s = open(source, O_RDONLY);
 	if(s == -1)
 	{	
 		perror(se);
@@ -43,7 +48,7 @@ int main()
 	}
 
 	//Open the destination file
-	d = open(argv[2], O_CREAT|O_WRONLY|O_EXCL /*set the flags so that file gets created if does not exist and we can tell if the file already exists*/);
+	d = open(destination, O_CREAT|O_WRONLY|O_EXCL /*set the flags so that file gets created if does not exist and we can tell if the file already exists*/);
 	//If the opening failed and file exists
 	if(d == -1 && errno == EEXIST)
 	{	
@@ -58,7 +63,7 @@ int main()
 		}
 		
 		//opening and truncating contents of destination file to zero bytes
-		d = open(argv[2], O_TRUNC|O_WRONLY);
+		d = open(destination, O_TRUNC|O_WRONLY);
 		
 		if(d == -1)
 		{
