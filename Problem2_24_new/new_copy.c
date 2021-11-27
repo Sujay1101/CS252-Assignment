@@ -63,7 +63,9 @@ int main()
 	if(copy(fds, fdd) == false)
 	{
 		perror("");
-		return 1;
+		close(fds);
+		close(fdd);
+		exit(1);
 	}
 	
 	//Close the files
