@@ -38,8 +38,8 @@ int main()
 	if((!access(d, F_OK)) == true)
 	{
 
-		bool e = user_prompt("Destination file exists\nPress 0 to truncate file\nPress 1 to abort ");
-		if(e)
+		char *e = user_prompt("Destination file exists\nPress 0 to truncate file\nPress 1 to abort ");
+		if(*e == '1')
 		{
 			close(fds);
 			exit(1);
@@ -49,11 +49,12 @@ int main()
 		//If destination file does not have write permission display error and exit
 		if((!access(d, W_OK)) == false)
 		{
-			perror("Destination file");
+			perror("Destination file write");
+			close(fds);
 			exit(1);
 		}
 	}
-	int fdd = open(d, flag);/*Open destination file*/
+	int fdd = open(d, flag, 0666);/*Open/create destination file with read and write permsission*/
 
 	//Copy contents of source file to destination file
 	bool c = copy(fds, fdd);	
