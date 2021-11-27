@@ -9,10 +9,10 @@
 #define STDOUT 0
 #define USER_RESPONSE_MAX_LENGTH 100
 
-char ur[USER_RESPONSE_MAX_LENGTH];/*Array store the last user esponse*/
+char ur[USER_RESPONSE_MAX_LENGTH];/*Array stores the last user response*/
 
 char* user_prompt(char *);/*Function to store user's response to a prompt*/
-bool copy(int s, int d);/*Function to copy contents of one open file to another empty open file*/
+bool copy(int s, int d);/*Function to copy contents of one open file to another open file*/
 
 int main()
 {
