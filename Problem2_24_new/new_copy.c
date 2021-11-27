@@ -56,10 +56,15 @@ int main()
 			exit(1);
 		}
 	}
+	
 	int fdd = open(d, flag, 0666);/*Open/create destination file with read and write permsission*/
 
 	//Copy contents of source file to destination file
-	bool c = copy(fds, fdd);	
+	if(copy(fds, fdd) == false)
+	{
+		perror("");
+		return 1;
+	}
 	
 	//Close the files
 	close(fdd);
@@ -89,7 +94,12 @@ bool copy(int s, int d)/*Arguments are file descriptors*/
 		short int nb = read(s, &c, sizeof(char));/*Read 1 byte from source file*/
 		if(nb == 0)/*If EOF reached*/
 			break;
-		nb = write(d, &c, sizeof(char));/*Write 1 byte to destination file*/	
+		else if(nb == -1)/*If read failed*/
+			return false;
+		
+		nb = write(d, &c, sizeof(char));/*Write 1 byte to destination file*/
+		if(nb == -1)/*Write failed*/
+			return false;
 	}
 	return true;
 }
