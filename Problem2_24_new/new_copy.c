@@ -1,3 +1,5 @@
+/*Program to copy contents of one file to another written using the POSIX API*/
+
 #include<string.h>
 #include<fcntl.h>
 #include<unistd.h>
