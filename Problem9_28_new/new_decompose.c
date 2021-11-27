@@ -1,3 +1,5 @@
+/*Program to find page number and page offset of a virtual address*/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
